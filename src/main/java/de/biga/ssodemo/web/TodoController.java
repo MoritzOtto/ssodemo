@@ -6,13 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-@RestController("api/todo")
+@RestController
+@RequestMapping("/api/todo")
 public class TodoController {
     private static final List<Todo> TODOS = new ArrayList<>();
 
@@ -28,17 +31,17 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addTodo(Todo todo) {
+    public ResponseEntity<Void> addTodo(@RequestBody Todo todo) {
         todo.setId(TODOS.size() + 1);
         TODOS.add(todo);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Todo> update(Todo todo) {
+    public ResponseEntity<Todo> update(@RequestBody Todo todo) {
         var todoToUpdate = findTodoById(todo.getId());
-        todoToUpdate.setHeader(todo.getHeader());
-        todoToUpdate.setBody(todo.getBody());
+        todoToUpdate.setTitle(todo.getTitle());
+        todoToUpdate.setDescription(todo.getDescription());
         todoToUpdate.setDone(todo.isDone());
 
         return ResponseEntity.ok(todoToUpdate);

@@ -17,6 +17,10 @@ export default defineComponent({
         }
     },
 
+    mounted() {
+        this.reload();
+    },
+
     methods: {
         async reload() {
             let todos = await todoService.getAllTodos();
@@ -33,6 +37,10 @@ export default defineComponent({
             await todoService.addTodo(todo);
             await this.reload();
             this.dialogOpen = false;
+        },
+        async resolve(id: number) {
+            await todoService.resolveTodo(id);
+            await this.reload();
         }
     }
 });
@@ -89,7 +97,7 @@ export default defineComponent({
                         <v-card-title v-text="todo.title"></v-card-title>
                         <v-card-text>{{ todo.description }}</v-card-text>
                         <v-card-actions>
-                            <v-btn color="primary" block @click="todo.done = true; reload()" v-if="!todo.done">Erledigen</v-btn>
+                            <v-btn color="primary" block @click="resolve(todo.id)" v-if="!todo.done">Erledigen</v-btn>
                             <v-btn color="primary" block v-if="todo.done" disabled>Erledigt</v-btn>
                         </v-card-actions>
 

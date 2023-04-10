@@ -1,4 +1,4 @@
-package de.biga.ssodemo.security;
+package de.biga.ssodemo.app;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

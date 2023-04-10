@@ -9,10 +9,10 @@ public class Todo {
     private int id;
     @Getter
     @Setter
-    private String header;
+    private String title;
     @Getter
     @Setter
-    private String body;
+    private String description;
     @Getter
     @Setter
     private boolean done;

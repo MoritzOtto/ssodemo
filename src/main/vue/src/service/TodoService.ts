@@ -1,3 +1,5 @@
+import RestService from "@/service/RestService";
+
 export class Todo {
     public id: number;
     public title: string;
@@ -10,25 +12,30 @@ export class Todo {
         this.description = description;
         this.done = done;
     }
-
 }
 
 export default class TodoService {
 
+    restService: RestService;
     todos = [] as Todo[];
 
-    public async getAllTodos() {
-        return this.todos;
+    constructor() {
+        this.restService = new RestService();
     }
 
-    public async addTodo(newTodo: {title: string, description: string}) {
-        this.todos.push(new Todo(this.todos.length + 1, newTodo.title, newTodo.description, false));
+
+    public async getAllTodos(): Promise<Todo[]> {
+        return await this.restService.get("todo");
     }
 
-    public async resolveTodo(id: number) {
-        const foundTodo = this.todos.find(it => it.id === id);
-        if(foundTodo) {
-            foundTodo.done = true;
-        }
+    public async addTodo(newTodo: {title: string, description: string}): Promise<void> {
+        return await this.restService.post("todo", newTodo);
+    }
+
+    public async resolveTodo(id: number): Promise<void> {
+        const todo = await this.restService.get(`todo/${id}`);
+        console.log(todo);
+        todo.done = true;
+        await this.restService.put("todo", todo);
     }
 }
