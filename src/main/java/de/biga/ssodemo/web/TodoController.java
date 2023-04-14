@@ -1,6 +1,7 @@
 package de.biga.ssodemo.web;
 
 import de.biga.ssodemo.app.Todo;
+import de.biga.ssodemo.app.TodoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,40 +18,37 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/api/todo")
 public class TodoController {
-    private static final List<Todo> TODOS = new ArrayList<>();
+    private final TodoService todoService;
+
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Todo>> getAllTodos() {
-        return ResponseEntity.ok(TODOS);
+        List<Todo> allTodos = todoService.getAllTodos();
+        return ResponseEntity.ok(allTodos);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Todo> getSingleTodo(@PathVariable("id") int id) {
-        var todo = findTodoById(id);
+        var todo = todoService.findTodoById(id);
         return ResponseEntity.ok(todo);
     }
 
     @PostMapping
     public ResponseEntity<Void> addTodo(@RequestBody Todo todo) {
-        todo.setId(TODOS.size() + 1);
-        TODOS.add(todo);
+        todoService.addTodo(todo);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<Todo> update(@RequestBody Todo todo) {
-        var todoToUpdate = findTodoById(todo.getId());
+        var todoToUpdate = todoService.findTodoById(todo.getId());
         todoToUpdate.setTitle(todo.getTitle());
         todoToUpdate.setDescription(todo.getDescription());
         todoToUpdate.setDone(todo.isDone());
 
         return ResponseEntity.ok(todoToUpdate);
-    }
-
-    private static Todo findTodoById(int id) {
-        return TodoController.TODOS.stream()
-                .filter(x -> x.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException(""));
     }
 }
