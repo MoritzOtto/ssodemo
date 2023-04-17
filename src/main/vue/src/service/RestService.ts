@@ -22,13 +22,11 @@ export default class RestService {
 
 
     private async fetch(path: string, method: string, payload: any) {
-        console.log("PROC", import.meta.env.VITE_APP_BASE_URL);
         const response = await fetch(import.meta.env.VITE_APP_BASE_URL + path, {
             method: method,
             headers: this.getDefaultHeader(),
             body: payload ? JSON.stringify(payload) : undefined,
         });
-        console.log("RESPONSE", response);
 
         let responseContent = await response.text();
         return responseContent ? JSON.parse(responseContent) : {};
