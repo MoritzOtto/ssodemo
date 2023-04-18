@@ -9,7 +9,7 @@ import * as auth from "./auth/authRedirect.js";
 
 export default defineComponent({
     data() {
-        return { loggedIn: false};
+        return { loggedIn: false };
     },
 
     mounted() {

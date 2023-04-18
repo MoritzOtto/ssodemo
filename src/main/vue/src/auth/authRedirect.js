@@ -13,7 +13,7 @@ const callBacks = [];
  */
 export const msalConfig = {
   auth: {
-    clientId: import.meta.env.VITE_APP_CLIENT_ID,
+    clientId: import.meta.env.VITE_APP_CLIENTID,
     authority: import.meta.env.VITE_APP_AUTHORITY,
     redirectUri: import.meta.env.VITE_APP_REDIRECT_URL,
   },
@@ -54,7 +54,7 @@ export const msalConfig = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-  scopes: [import.meta.env.VITE_API_SCOPES],
+  scopes: [import.meta.env.VITE_APP_API_SCOPE],
 };
 
 /**

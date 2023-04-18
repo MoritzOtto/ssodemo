@@ -1,4 +1,5 @@
-import type {Todo} from "@/service/TodoService";
+// @ts-ignore
+import {getAuthToken} from "@/auth/authRedirect";
 
 export default class RestService {
 
@@ -16,7 +17,7 @@ export default class RestService {
 
     private getDefaultHeader = () =>
         new Headers({
-            //Authorization: "Bearer " + getAuthToken(),
+            Authorization: "Bearer " + getAuthToken(),
             "Content-Type": "application/json",
         });
 
