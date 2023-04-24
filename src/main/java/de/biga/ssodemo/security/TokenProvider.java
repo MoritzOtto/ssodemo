@@ -21,6 +21,8 @@ public class TokenProvider {
     @Value("${clientId}")
     private String clientId;
 
+    @Value("${audience}")
+    private String audience;
 
     public boolean validateToken(String token) {
         if (token == null) {
@@ -31,6 +33,10 @@ public class TokenProvider {
 
         try {
             if (Instant.now().isAfter(jwt.getExpiresAtAsInstant())) {
+                return false;
+            }
+
+            if(jwt.getAudience().stream().noneMatch(it -> it.equals(audience))) {
                 return false;
             }
 
