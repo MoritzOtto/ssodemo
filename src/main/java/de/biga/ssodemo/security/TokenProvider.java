@@ -36,7 +36,7 @@ public class TokenProvider {
                 return false;
             }
 
-            if(jwt.getAudience().stream().noneMatch(it -> it.equals(audience))) {
+            if (jwt.getAudience().stream().noneMatch(it -> it.equals(audience))) {
                 return false;
             }
 

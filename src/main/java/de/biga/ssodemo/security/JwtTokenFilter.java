@@ -1,6 +1,6 @@
 package de.biga.ssodemo.security;
 
-import de.biga.ssodemo.app.AzureAuthentification;
+import de.biga.ssodemo.app.AzureAuthentication;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,7 +25,7 @@ public class JwtTokenFilter implements Filter {
         String jwt = resolveToken(httpServletRequest);
         if (tokenProvider.validateToken(jwt)) {
             SecurityContextHolder.getContext()
-                    .setAuthentication(new AzureAuthentification());
+                    .setAuthentication(new AzureAuthentication());
         }
         chain.doFilter(request, response);
     }
