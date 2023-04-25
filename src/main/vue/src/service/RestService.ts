@@ -1,6 +1,3 @@
-// @ts-ignore
-import {getAuthToken} from "@/auth/authRedirect";
-
 export default class RestService {
 
     async get(path: string) {
@@ -17,7 +14,6 @@ export default class RestService {
 
     private getDefaultHeader = () =>
         new Headers({
-            Authorization: "Bearer " + getAuthToken(),
             "Content-Type": "application/json",
         });
 

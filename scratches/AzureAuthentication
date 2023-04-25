@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public class AzureAuthentication implements Authentication {
+public class AzureAuthentication implements Authentication {m
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
