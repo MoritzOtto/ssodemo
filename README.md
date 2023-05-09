@@ -1,8 +1,11 @@
 # ssodemo
-Hey, this is a demo to connect a sso frontend and a backend with azure ad identity provider
+Hey, this is a demo to connect a sso frontend to a backend with an azure ad identity provider
+
+## Azure Config
+Add an Azure Application with SPA capacity and add a redirect uri with port 5173, add a new api with a random path you will use later (see placeholder).
 
 ## Frontend
-This Frontend is written by vue.js and use the quickstart source code by azure. This is in javascript, so you should create types when use it. But for sure you could ignore warnings ;-)
+This Frontend is written by vue.js and uses the quickstart source code by azure. This is in javascript, so you should create types when using it. But for sure you could ignore warnings ;-)
 To start this, you have to create an `.env`-file with that content
 ``
 VITE_APP_BASE_URL=http://localhost:5173/api/
